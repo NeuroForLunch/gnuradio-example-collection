@@ -1,0 +1,755 @@
+options:
+  parameters:
+    author: ''
+    category: Custom
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: usrp_echotimer_fsk_tracking_singletarget
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: 1280, 1280
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [11, 10]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: block_per_tag
+  id: variable
+  parameters:
+    comment: ''
+    value: 2**20
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1059, 1125]
+    rotation: 0
+    state: enabled
+- name: center_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: '2450000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [285, 17]
+    rotation: 0
+    state: enabled
+- name: decim_fac
+  id: variable
+  parameters:
+    comment: ''
+    value: 2**12
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1177, 1206]
+    rotation: 0
+    state: enabled
+- name: delay_samp
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Number delay samples
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '39'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [610, 1149]
+    rotation: 0
+    state: enabled
+- name: delta_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: '11000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [415, 1210]
+    rotation: 0
+    state: enabled
+- name: fac_corr
+  id: variable
+  parameters:
+    comment: ''
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 20]
+    rotation: 0
+    state: enabled
+- name: freq_res
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate_red/float(packet_len_red)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [109, 1212]
+    rotation: 0
+    state: enabled
+- name: gain_rx
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,1
+    label: RX gain
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '10'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [133, 100]
+    rotation: 0
+    state: enabled
+- name: gain_tx
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,0
+    label: TX gain
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '10'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [17, 105]
+    rotation: 0
+    state: enabled
+- name: measure_time
+  id: variable
+  parameters:
+    comment: ''
+    value: (block_per_tag*samp_per_freq*2)/float(samp_rate)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 1211]
+    rotation: 0
+    state: enabled
+- name: min_output_buffer
+  id: variable
+  parameters:
+    comment: ''
+    value: 2*samp_per_freq*block_per_tag*2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [393, 16]
+    rotation: 0
+    state: enabled
+- name: packet_len_red
+  id: variable
+  parameters:
+    comment: ''
+    value: block_per_tag//decim_fac
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1060, 1207]
+    rotation: 0
+    state: enabled
+- name: range_res
+  id: variable
+  parameters:
+    comment: ''
+    value: 3e8/2/delta_freq*fac_corr
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [19, 1211]
+    rotation: 0
+    state: enabled
+- name: range_time
+  id: variable
+  parameters:
+    comment: ''
+    value: '60'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [628, 17]
+    rotation: 0
+    state: enabled
+- name: samp_per_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [941, 1127]
+    rotation: 0
+    state: enabled
+- name: samp_protect
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 1,1
+    label: Find peak protected samples
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '100'
+    value: '1'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [264, 107]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '20000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 19]
+    rotation: 0
+    state: enabled
+- name: samp_rate_red
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate//2//samp_per_freq//decim_fac
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [940, 1209]
+    rotation: 0
+    state: enabled
+- name: threshold
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 1,0
+    label: Find peak threshold
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '-200'
+    step: '1'
+    stop: '100'
+    value: '-200'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [439, 107]
+    rotation: 0
+    state: enabled
+- name: vel_res
+  id: variable
+  parameters:
+    comment: ''
+    value: freq_res/2.0/center_freq*3e8
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [308, 1210]
+    rotation: 0
+    state: enabled
+- name: wait_to_start
+  id: variable
+  parameters:
+    comment: ''
+    value: '0.02'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [500, 1207]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_conjugate_cc_0
+  id: blocks_multiply_conjugate_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [602, 874]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_conjugate_cc_1
+  id: blocks_multiply_conjugate_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer//2//samp_per_freq//decim_fac
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [137, 597]
+    rotation: 180
+    state: enabled
+- name: blocks_tagged_stream_multiply_length_0
+  id: blocks_tagged_stream_multiply_length
+  parameters:
+    affinity: ''
+    alias: ''
+    c: 1/float(decim_fac)
+    comment: ''
+    lengthtagname: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer//samp_per_freq//2//decim_fac
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [651, 552]
+    rotation: 180
+    state: enabled
+- name: blocks_tagged_stream_multiply_length_0_0
+  id: blocks_tagged_stream_multiply_length
+  parameters:
+    affinity: ''
+    alias: ''
+    c: 1/float(decim_fac)
+    comment: ''
+    lengthtagname: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer//samp_per_freq//2//decim_fac
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [649, 655]
+    rotation: 180
+    state: enabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate_red
+    comment: ''
+    fc: '0'
+    fftsize: packet_len_red
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: QT GUI Plot
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'True'
+    showrf: 'False'
+    type: complex
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1077, 26]
+    rotation: 0
+    state: disabled
+- name: radar_estimator_fsk_0
+  id: radar_estimator_fsk
+  parameters:
+    affinity: ''
+    alias: ''
+    center_freq: center_freq
+    comment: ''
+    delta_freq: delta_freq/fac_corr
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    push_power: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [431, 470]
+    rotation: 0
+    state: enabled
+- name: radar_find_max_peak_c_0
+  id: radar_find_max_peak_c
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    cut_max_freq: 'False'
+    len_key: '"packet_len"'
+    max_freq: '[]'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_protect: int(samp_protect)
+    samp_rate: samp_rate_red
+    threshold: threshold
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [104, 451]
+    rotation: 0
+    state: enabled
+- name: radar_print_results_1
+  id: radar_print_results
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filename: '"store_msgs.txt"'
+    store_msg: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1078, 475]
+    rotation: 0
+    state: enabled
+- name: radar_qtgui_time_plot_0
+  id: radar_qtgui_time_plot
+  parameters:
+    affinity: ''
+    alias: ''
+    axis_y: -3,3
+    comment: ''
+    interval: '100'
+    label: ''
+    label_y: '''velocity'''
+    range_time: range_time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1074, 270]
+    rotation: 0
+    state: enabled
+- name: radar_qtgui_time_plot_0_0
+  id: radar_qtgui_time_plot
+  parameters:
+    affinity: ''
+    alias: ''
+    axis_y: 0,15
+    comment: ''
+    interval: '100'
+    label: ''
+    label_y: '''range'''
+    range_time: range_time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1080, 157]
+    rotation: 0
+    state: enabled
+- name: radar_qtgui_time_plot_0_0_1
+  id: radar_qtgui_time_plot
+  parameters:
+    affinity: ''
+    alias: ''
+    axis_y: 0,15
+    comment: ''
+    interval: '100'
+    label: '"TRACKING"'
+    label_y: '''range'''
+    range_time: range_time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [797, 45]
+    rotation: 0
+    state: enabled
+- name: radar_qtgui_time_plot_0_1
+  id: radar_qtgui_time_plot
+  parameters:
+    affinity: ''
+    alias: ''
+    axis_y: -3,3
+    comment: ''
+    interval: '100'
+    label: '"TRACKING"'
+    label_y: '''velocity'''
+    range_time: range_time
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [774, 216]
+    rotation: 0
+    state: enabled
+- name: radar_signal_generator_fsk_c_0
+  id: radar_signal_generator_fsk_c
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: '0.5'
+    blocks_per_tag: block_per_tag
+    comment: ''
+    freq_high: delta_freq/2
+    freq_low: -delta_freq/2
+    len_key: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer
+    samp_per_freq: samp_per_freq
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [28, 856]
+    rotation: 0
+    state: enabled
+- name: radar_split_fsk_cc_0
+  id: radar_split_fsk_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    len_key: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer//2
+    samp_discard: samp_per_freq-1
+    samp_per_freq: samp_per_freq
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [842, 871]
+    rotation: 0
+    state: enabled
+- name: radar_tracking_singletarget_0
+  id: radar_tracking_singletarget
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    filter: '"particle"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_particle: '500'
+    std_accel_sys: '2'
+    std_range_meas: range_res/100
+    std_velocity_meas: vel_res
+    threshold_lost: '1'
+    threshold_track: '0.001'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [738, 343]
+    rotation: 0
+    state: enabled
+- name: radar_ts_fft_cc_0
+  id: radar_ts_fft_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    len_key: ' "packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_len: packet_len_red
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [373, 660]
+    rotation: 180
+    state: enabled
+- name: radar_ts_fft_cc_0_0
+  id: radar_ts_fft_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    len_key: ' "packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_len: packet_len_red
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [374, 557]
+    rotation: 180
+    state: enabled
+- name: radar_usrp_echotimer_cc_0
+  id: radar_usrp_echotimer_cc
+  parameters:
+    affinity: ''
+    alias: ''
+    antenna_rx: '''J1'''
+    antenna_tx: '''J1'''
+    args_rx: '''addr=192.168.10.6'''
+    args_tx: '''addr=192.168.10.4'''
+    center_freq: center_freq
+    clock_source_rx: '''mimo'''
+    clock_source_tx: '''gpsdo'''
+    comment: ''
+    gain_rx: gain_rx
+    gain_tx: gain_tx
+    len_key: '"packet_len"'
+    lo_offset_rx: '0'
+    lo_offset_tx: '0'
+    maxoutbuf: '0'
+    minoutbuf: min_output_buffer
+    num_delay_samps: int(delay_samp)
+    samp_rate: samp_rate
+    time_source_rx: '''mimo'''
+    time_source_tx: '''gpsdo'''
+    timeout_rx: '0.1'
+    timeout_tx: '0.1'
+    wait_rx: wait_to_start
+    wait_tx: wait_to_start
+    wire_rx: ''''''
+    wire_tx: ''''''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [348, 802]
+    rotation: 0
+    state: enabled
+- name: rational_resampler_xxx_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: decim_fac
+    fbw: '0'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1015, 558]
+    rotation: 180
+    state: enabled
+- name: rational_resampler_xxx_0_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: decim_fac
+    fbw: '0'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: ''
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1018, 661]
+    rotation: 180
+    state: enabled
+
+connections:
+- [blocks_multiply_conjugate_cc_0, '0', radar_split_fsk_cc_0, '0']
+- [blocks_multiply_conjugate_cc_1, '0', radar_find_max_peak_c_0, '0']
+- [blocks_tagged_stream_multiply_length_0, '0', qtgui_sink_x_0, '0']
+- [blocks_tagged_stream_multiply_length_0, '0', radar_ts_fft_cc_0_0, '0']
+- [blocks_tagged_stream_multiply_length_0_0, '0', radar_ts_fft_cc_0, '0']
+- [radar_estimator_fsk_0, Msg out, radar_print_results_1, Msg in]
+- [radar_estimator_fsk_0, Msg out, radar_qtgui_time_plot_0, Msg in]
+- [radar_estimator_fsk_0, Msg out, radar_qtgui_time_plot_0_0, Msg in]
+- [radar_estimator_fsk_0, Msg out, radar_tracking_singletarget_0, Msg in]
+- [radar_find_max_peak_c_0, Msg out, radar_estimator_fsk_0, Msg in]
+- [radar_signal_generator_fsk_c_0, '0', blocks_multiply_conjugate_cc_0, '1']
+- [radar_signal_generator_fsk_c_0, '0', radar_usrp_echotimer_cc_0, '0']
+- [radar_split_fsk_cc_0, '0', rational_resampler_xxx_0, '0']
+- [radar_split_fsk_cc_0, '1', rational_resampler_xxx_0_0, '0']
+- [radar_tracking_singletarget_0, Msg out, radar_qtgui_time_plot_0_0_1, Msg in]
+- [radar_tracking_singletarget_0, Msg out, radar_qtgui_time_plot_0_1, Msg in]
+- [radar_ts_fft_cc_0, '0', blocks_multiply_conjugate_cc_1, '1']
+- [radar_ts_fft_cc_0_0, '0', blocks_multiply_conjugate_cc_1, '0']
+- [radar_usrp_echotimer_cc_0, '0', blocks_multiply_conjugate_cc_0, '0']
+- [rational_resampler_xxx_0, '0', blocks_tagged_stream_multiply_length_0, '0']
+- [rational_resampler_xxx_0_0, '0', blocks_tagged_stream_multiply_length_0_0, '0']
+
+metadata:
+  file_format: 1
